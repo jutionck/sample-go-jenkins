@@ -38,7 +38,7 @@ pipeline{
         stage("Docker run test") {
             steps {
                 echo 'Go test'
-                sh 'docker run --name "${containerName}" ${imageName} sh -c "go test"'
+                sh 'docker run ${imageName} sh -c "go test"'
             }
         }
     }
