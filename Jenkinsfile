@@ -10,7 +10,7 @@ pipeline{
         stage("Cleaning up") {
             steps {
                 echo 'Cleaning up'
-                sh 'sudo docker rm -f "${containerName}" || true'
+                sh 'docker rm -f "${containerName}" || true'
             }
         }
 
@@ -24,21 +24,21 @@ pipeline{
         stage("Docker build") {
             steps {
                 echo 'Compiling and building'
-                sh 'sudo docker build -t "${imageName}" .'
+                sh 'docker build -t "${imageName}" .'
             }
         }
 
         stage("Docker run") {
             steps {
                 echo 'Go run'
-                sh 'sudo docker run --name "${containerName}" ${imageName}'
+                sh 'docker run --name "${containerName}" ${imageName}'
             }
         }
 
         stage("Docker run test") {
             steps {
                 echo 'Go test'
-                sh 'sudo docker run --name "${containerName}" ${imageName} sh -c "go test"'
+                sh 'docker run --name "${containerName}" ${imageName} sh -c "go test"'
             }
         }
     }
